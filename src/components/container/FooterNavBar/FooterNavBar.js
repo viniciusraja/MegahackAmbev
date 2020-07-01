@@ -22,12 +22,11 @@ const FooterNavBar = (props) => {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
   const { navigate } = useNavigation();
-  console.log(props)
   return (
     <View style={styles.cartItemCardContainer}>
       <TouchableOpacity
       style={styles.scanButtom}
-        onPress={() => navigate('QrCodeScannerScreen', { props:props })}>
+        onPress={() => navigate('QrCodeScannerScreen')}>
        <View style={styles.scanButtomContainer}>
          <MaterialCommunityIcons name="qrcode-scan" size={25} color={props.activeQr?props.activeQr:Constants.Colors.textsPrimary} />
          <Text style={styles.scanButtomText}>QrCode</Text>

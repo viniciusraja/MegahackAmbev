@@ -2,20 +2,18 @@ import { StyleSheet } from 'react-native';
 import Constants from 'config/constants/Constants';
 
 export const styles = StyleSheet.create({
-  cartItemCardContainer: {
-    position:'absolute',
-    bottom:5,
-    alignSelf:'center',
-    flexDirection:'row',
-    height:70,
-    width:'97%',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor:'#fcfcfc',
-    borderRadius:15,
-    elevation:7,
-    paddingHorizontal:7
-
+  hintContainer: {
+      position:'absolute',
+      top:0,
+      height:'100%',
+      width:'100%',
+      paddingVertical:10,
+      alignSelf:'center',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      backgroundColor:'#f5f5f5',
+      borderRadius:10,
+      elevation:7
   },
   scanButtom:{
     height:'100%',
