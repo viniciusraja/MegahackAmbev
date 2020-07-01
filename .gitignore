@@ -1,0 +1,28 @@
+node_modules/**/*
+.expo/*
+.env
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+web-report/
+
+
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+GoogleService-Info.plist
+
+# macOS
+.DS_Store
+src/config/constants/constantsKeys.js
+yarn-error.log
+src/store/data/categoriesList.json
+src/store/data/productsList.json
+src/store/data/burguersList.json
+src/store/data/sideDishesList.json
+src/store/data/drinksList.json

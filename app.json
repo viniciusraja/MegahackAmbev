@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "MegaHackAmbev",
+    "slug": "megahack",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "facebookAppId":"1094673257554870",
+    "facebookDisplayName":"Sells App",
+    "facebookScheme":"fb1094673257554870",
+    "icon": "./src/assets/images/icon.png",
+    "scheme": "myapp",
+    "splash": {
+      "image": "./src/assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#317065"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "covid19.estatistica",
+      "buildNumber": "1.0.0",
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "covid19.estatistica",
+      "versionCode": 1,
+      "googleServicesFile": "./google-services.json"
+    }
+  }
+}

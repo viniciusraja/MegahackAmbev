@@ -1,0 +1,80 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "test": "jest --watchAll"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "universe/native"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^10.0.0",
+    "@react-native-community/masked-view": "0.1.6",
+    "@react-navigation/bottom-tabs": "^5.0.0",
+    "@react-navigation/native": "react-navigation/native",
+    "@react-navigation/stack": "^5.2.11",
+    "@react-navigation/web": "~1.0.0-alpha.9",
+    "axios": "^0.19.2",
+    "expo": "~37.0.3",
+    "expo-asset": "~8.1.4",
+    "expo-constants": "~9.0.0",
+    "expo-facebook": "~8.1.0",
+    "expo-firebase-analytics": "~2.1.1",
+    "expo-firebase-app": "^2.0.0",
+    "expo-firebase-core": "~1.0.0",
+    "expo-font": "~8.1.0",
+    "expo-google-app-auth": "^8.1.0",
+    "expo-image-picker": "~8.1.0",
+    "expo-secure-store": "~8.1.0",
+    "expo-web-browser": "~8.2.1",
+    "lottie-react-native": "~2.6.1",
+    "metro-config": "^0.59.0",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
+    "react-native-autocomplete-input": "^4.2.0",
+    "react-native-dotenv": "^0.2.0",
+    "react-native-gesture-handler": "~1.6.0",
+    "react-native-image-picker": "^2.3.1",
+    "react-native-motion": "^1.0.5",
+    "react-native-reanimated": "~1.7.0",
+    "react-native-safe-area-context": "0.7.3",
+    "react-native-screens": "~2.2.0",
+    "react-native-shared-element": "0.5.6",
+    "react-native-web": "~0.11.7",
+    "react-navigation": "^4.3.7",
+    "react-navigation-hooks": "^1.1.0",
+    "react-navigation-shared-element": "^2.3.0",
+    "react-navigation-stack": "^2.3.12",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.6",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "babel-plugin-root-import": "^6.5.0",
+    "babel-preset-expo": "~8.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-universe": "^3.0.0",
+    "jest-expo": "~37.0.0",
+    "prettier": "^2.0.4",
+    "react-test-renderer": "^16.13.1"
+  },
+  "assetBundlePatterns": [
+    "assets/**"
+  ],
+  "private": true
+}
