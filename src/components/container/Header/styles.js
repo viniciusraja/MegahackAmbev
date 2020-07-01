@@ -10,12 +10,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor:Constants.Colors.backgroundColor
   },
-  cartButtonContainer:{
-    height:'100%',
-    width:45,
-    justifyContent:'center',
-    alignItems:'center'
-  },
+  
   input:{
     height:40,
     width: '70%',
@@ -29,21 +24,21 @@ export const styles = StyleSheet.create({
     textShadowRadius: 5,
     opacity:0.7,
     },
-    quantityOfItemsInCartContainer:{
+    userLevelContainer:{
     position:'absolute',
     height:15,
     width:15,
     bottom:6,
-    right:0,
+    right:5,
     backgroundColor:Constants.Colors.yellow,
     justifyContent:'center',
     alignItems:'center',
     borderRadius:10,
     },
-    quantityOfItemsInCartText:{
+    userLevelText:{
       textAlign:'center',
       color:'#fff',
-      fontFamily:Constants.fontFamily,
+      fontFamily:Constants.fontFamilyXBold,
       fontSize:12,
     },
     loginButtonContainer:{
@@ -63,9 +58,9 @@ export const styles = StyleSheet.create({
 
     autoCompleteContainerToFixPosition: {
       position:'absolute',
-      zIndex: 60,
-      width:282,
-      left:(Constants.Layout.window.width-282)/2,
+      zIndex: 10,
+      width:300,
+      right:10,
       top:(Constants.Layout.headerHeight-40)/2,
       height:Constants.Layout.headerHeight,
     },
@@ -81,7 +76,7 @@ export const styles = StyleSheet.create({
     },
     inputContainerStyle: {
       height: 29,
-      width: 280,
+      width: 300,
       borderWidth: 0,
       borderRadius: 20,
     },

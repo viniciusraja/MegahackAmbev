@@ -83,24 +83,7 @@ const Header = (props) => {
   let total = getTotalPriceOfCart(cartList);
   return (
     <View style={styles.headerContainer}>
-      <TouchableOpacity
-        onPress={() => navigate('CartScreen')}
-        style={styles.cartButtonContainer}>
-        <MaterialCommunityIcons
-          name="cart-outline"
-          size={24}
-          color={Constants.Colors.lightGrey}
-        />
-        {(total>0)&&<Animated.View
-          style={[
-            styles.quantityOfItemsInCartContainer,
-            {
-              transform: [{ scale: springValue }],
-            },
-          ]}>
-          <Text style={styles.quantityOfItemsInCartText}>{total}</Text>
-        </Animated.View>}
-      </TouchableOpacity>
+      
       <View style={styles.autoCompleteContainerToFixPosition}>
               <Autocomplete
                 onPress={() => this.myTextInput.current.clear()}
@@ -120,7 +103,7 @@ const Header = (props) => {
                 defaultValue={search}
                 onChangeText={(text) => setSearch(text) }
                 keyExtractor={(item) => `${item.id}`}
-                placeholder="Pesquise Seu Produto"
+                placeholder="Ache sua bebida"
                 renderItem={({ item, index }) => {
                   if (index < 4) {
                     return (
@@ -163,7 +146,16 @@ const Header = (props) => {
           color={Constants.Colors.lightGrey}
         />
         }
-      </TouchableOpacity>
+        {(true)&&<Animated.View
+          style={[
+            styles.userLevelContainer,
+            {
+              transform: [{ scale: springValue }],
+            },
+          ]}>
+          <Text style={styles.userLevelText}>2</Text>
+        </Animated.View>}
+      </TouchableOpacity> 
     </View>
   );
 };
