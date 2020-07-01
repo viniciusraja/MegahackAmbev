@@ -17,6 +17,7 @@ import {
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
+import FooterNavBar from 'components/container/FooterNavBar'
 
 import LoginContainer from 'components/container/LoginContainer';
 import ProductsList from 'components/container/ProductsList/ProductsList';
@@ -107,8 +108,10 @@ class HomeScreen extends Component {
         resizeMode="cover"
         /></View> */}
         <LoginContainer />
+
         <AdminProductConfigurationForm />
         <AdminCategoryConfigurationForm />
+        <FooterNavBar/>
       </View>
     );
   }
