@@ -4,20 +4,38 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import Constants from 'config/constants/Constants';
 import FooterNavBar from 'components/container/FooterNavBar'
 import { Ionicons } from '@expo/vector-icons';
-export default function App() {
+import { useNavigation } from 'react-navigation-hooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { showHintComponent } from 'store/ducks/actions/showComponent';
+import HintsComponent from 'components/container/HintsComponent'
+export default function QrCodeScannerScreen() {
+  const { navigate } = useNavigation();
+  const dispatch = useDispatch();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-
+  const [hintComponent, setHintComponent] = useState(false);
+  const [navigationData, setNavigationData] = useState('');
+  
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
   }, []);
-
-  const handleBarCodeScanned = ({ type, data }) => {
+  
+  useEffect(() =>{
+    if(!!navigationData.route)navigate(`${navigationData.route}`)
+  }, [navigationData]);
+  
+  const handleBarCodeScanned = async ({ type, data }) => {
+    try{
+      const navigationData= JSON.parse(data)
     setScanned(true);
-    Alert.alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    setNavigationData(navigationData)
+  }catch(error){console.log(error)}
+  if(!!navigationData.route)navigate(`${navigationData.route}`)
+  if(!!navigationData.hint)dispatch(showHintComponent())
+  // Alert.alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
   if (hasPermission === null) {
@@ -44,7 +62,9 @@ export default function App() {
       <Text style={styles.scanAgainButtomText}>SCAN</Text>
       </TouchableOpacity>}
     </View>
+    <HintsComponent/>
     <FooterNavBar activeQr={Constants.Colors.yellow}/>
+    
     </>
   );
 }

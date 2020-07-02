@@ -3,11 +3,10 @@ import {Provider} from 'react-redux'
 import configureStore from './src/store/ducks/store/configureStore'
 
 import { StatusBar, View} from 'react-native';
-import FooterNavBar from 'components/container/FooterNavBar'
 
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
-import Router from './src/navigation/navigations'
+import Router from 'navigation/navigations'
 
 const store=configureStore()
 class App extends React.Component{
@@ -48,7 +47,6 @@ class App extends React.Component{
         <Provider store={store}>
         <StatusBar hidden />
         <Router/>
-        <FooterNavBar/>
         </Provider>
         </>:<View/>
         )

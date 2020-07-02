@@ -2,6 +2,10 @@
   "expo": {
     "name": "MegaHackAmbev",
     "slug": "megahack",
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": ["js", "jsx", "svg", "ts", "tsx"]
+    },
     "platforms": [
       "ios",
       "android",
@@ -9,9 +13,9 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "facebookAppId":"1094673257554870",
-    "facebookDisplayName":"Sells App",
-    "facebookScheme":"fb1094673257554870",
+    "facebookAppId": "1094673257554870",
+    "facebookDisplayName": "Sells App",
+    "facebookScheme": "fb1094673257554870",
     "icon": "./src/assets/images/icon.png",
     "scheme": "myapp",
     "splash": {
@@ -35,6 +39,7 @@
       "package": "covid19.estatistica",
       "versionCode": 1,
       "googleServicesFile": "./google-services.json"
-    }
+    },
+    "description": ""
   }
 }

@@ -28,18 +28,29 @@ const HintsComponent = (props) => {
   const { navigate } = useNavigation();
   return (
     <>
-    { hintIsOpened? (
+    { true? (
       <View style={styles.hintContainer}>
          <TouchableOpacity
             onPress={() => dispatch(showHintComponent())}
-            style={{ alignSelf: 'flex-end', marginRight: 10 }}>
+            style={{ alignSelf: 'flex-end', right: 10, top:10 , position:'absolute'}}>
             <AntDesign
               name="close"
               size={22}
               color={Constants.Colors.textsPrimary}
             />
           </TouchableOpacity>
-          <Text style={{fontSize:40}}>Dicas</Text>
+          <View style={styles.hintsHeader}>
+          <Text style={styles.hintsTitle}>Pão De Queijo</Text>
+          <View style={styles.hintsImageContainer}>
+
+          <Image style={styles.hintsImage}
+                  source={require('assets/images/ambevProducts.png')}
+                  resizeMode="cover"
+                  />
+                  </View>
+                  </View>
+          <Text style={styles.hintsDescription}>Loremasc assc iic asjicnbiasc ascas csaa sc as c asc asc as c asc as c asc as cascascasc ascascas ei ajcnoabownc awocjnaowc awojcnoawnc awojncoanw awcjn awcoinaw oawncl j oawnc</Text>
+
       </View>
     ) : (
       <View />

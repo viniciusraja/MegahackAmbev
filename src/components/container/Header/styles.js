@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor:Constants.Colors.backgroundColor
+    backgroundColor:Constants.Colors.yellow,
   },
   
   input:{

@@ -27,13 +27,11 @@ export const styles = StyleSheet.create({
     width:'100%',
     justifyContent:'center',
     alignItems:'center',
-    borderRightWidth:1,
-    borderColor:Constants.Colors.textsPrimary
     
   },
   scanButtomText:{
     fontFamily:Constants.fontFamilyXBold,
     color:Constants.Colors.textsSecondary,
-    fontSize:11
+    fontSize:Constants.fontSizeSmall
   }
 });
