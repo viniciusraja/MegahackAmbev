@@ -4,12 +4,11 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import HomeScreen from 'screens/HomeScreen';
 import ProducItemDescription from 'screens/ProductItemDescriptionScreen';
-import CartScreen from 'screens/CartScreen';
 import Header from 'components/container/Header';
 import { SharedElement } from 'react-native-shared-element';
 import QrCodeScannerScreen from 'screens/QrCodeScannerScreen';
 import UserPoints from 'screens/UserPoints';
-
+import EventsMap from 'screens/EventsMap'
 const AppNavigator = createSharedElementStackNavigator(
   {
     Home: {
@@ -53,25 +52,10 @@ const AppNavigator = createSharedElementStackNavigator(
         header: () => <Header />,
       },
     },
-    CartScreen: {
-      screen: CartScreen,
-
-      defaultNavigationOptions: {
-        cardStyleInterpolator: ({ current: { progress } }) => {
-          return {
-            cardStyle: {
-              opacity: progress,
-              color: progress,
-              backgroundColor: progress,
-            },
-          };
-        },
-        cardStyle: {
-          backgroundColor: 'transparent',
-        },
-      },
+    EventsMap: {
+      screen: EventsMap,
       navigationOptions: {
-        header: () => <Header />,
+        headerShown:false
       },
     },
     QrCodeScannerScreen: {

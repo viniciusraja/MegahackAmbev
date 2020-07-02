@@ -28,7 +28,6 @@ import { SharedElement } from 'react-native-motion';
 import * as SecureStore from 'expo-secure-store';
 import fetchProductsList from 'store/ducks/actions/productsList';
 import { showAdminCategoryConfigComponent } from 'store/ducks/actions/showComponent';
-import LottieView from "lottie-react-native";
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
@@ -72,23 +71,6 @@ class HomeScreen extends Component {
               </View>
           
           }
-          ListFooterComponent={
-            <TouchableOpacity
-              style={{
-                marginVertical: 30,
-                backgroundColor: 'red',
-                justifyContent: 'center',
-                alignItems: 'center',
-                alignSelf: 'center',
-                height: 45,
-                width: 45,
-                borderRadius: 30,
-              }}
-              onPress={()=>this.props.showAdminCategoryConfigComponent(this.props.productsList)}
-            >
-              <Ionicons name="ios-add" size={30} color="#fff" />
-            </TouchableOpacity>
-          }
           renderItem={({ item }) => (
             <ProductsList
               categoryId={item.id}
@@ -100,18 +82,12 @@ class HomeScreen extends Component {
           keyExtractor={(item) => `${item.id}`}
           showsVerticalScrollIndicator={false}
         />
-        {/* <View style={{ alignSelf:'center', width: 90, height: 90}}>
-        <LottieView
-        source={require('assets/animations/Sucos.json')}
-        autoPlay
-        style={{ width: 80, height: 80 , backfaceVisibility:'hidden'}}
-        resizeMode="cover"
-        /></View> */}
-        <LoginContainer />
+        
 
         <AdminProductConfigurationForm />
         <AdminCategoryConfigurationForm />
         <FooterNavBar/>
+        <LoginContainer />
       </View>
     );
   }
@@ -133,6 +109,7 @@ const styles = StyleSheet.create({
     height:250,
     backgroundColor:Constants.Colors.yellow,
     alignSelf:'center',
+    marginTop:10,
   },
   headerImage: {
     alignSelf:'center',
