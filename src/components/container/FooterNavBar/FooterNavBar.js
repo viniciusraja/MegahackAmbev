@@ -10,16 +10,16 @@ import {
   FontAwesome,
   Feather,
   AntDesign,
+  SimpleLineIcons,
   Entypo
 } from '@expo/vector-icons';
 import { styles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useNavigationState } from 'react-navigation-hooks';
 import Constants from 'config/constants/Constants';
-// import Icona from 'assets/svg/Icona.svg' 
-// import Iconaa from 'assets/svg/Iconaa.svg' 
-// import Aaa from 'assets/svg/aaa.svg' 
+
 import CoinIcone from 'assets/svg/CoinIcone.svg'
+import CoinIconActive from 'assets/svg/CoinIconActive.svg'
 
 const FooterNavBar = (props) => {
   const [search, setSearch] = useState('');
@@ -33,7 +33,7 @@ const FooterNavBar = (props) => {
         onPress={() => navigate('Home')}>
     <View style={styles.scanButtomContainer}>
         <AntDesign name="home" size={25} color={Constants.Colors.textsPrimary} />
-       <Text style={styles.scanButtomText}>QrCode</Text>
+       <Text style={styles.scanButtomText}>Home</Text>
        </View>
 
        </TouchableOpacity>
@@ -42,25 +42,26 @@ const FooterNavBar = (props) => {
       style={styles.scanButtom}
         onPress={() => navigate('QrCodeScannerScreen')}>
       <View style={styles.scanButtomContainer}>
-         <MaterialCommunityIcons name="qrcode-scan" size={25} color={props.activeQr?props.activeQr:Constants.Colors.textsPrimary} />
+      <AntDesign name="qrcode"  size={27} color={props.activeQr?props.activeQr:Constants.Colors.textsPrimary} />
          <Text style={styles.scanButtomText}>QrCode</Text>
       </View>
       </TouchableOpacity>}
      
-      {routeName!="ProducItemDescription" &&<TouchableOpacity
+      {routeName!="EventsMap" &&<TouchableOpacity
       style={styles.scanButtom}
-        onPress={() => navigate('ProducItemDescription', { props:props })}>
+        onPress={() => navigate('EventsMap', { props:props })}>
        <View style={styles.scanButtomContainer}>
-         <Feather name="truck" size={25} color={props.activeChopp?props.activeChopp:Constants.Colors.textsPrimary}  />
-         <Text style={styles.scanButtomText}>Chopp Car</Text>
+       <SimpleLineIcons name="location-pin" size={25} color={routeName=="EventsMap"?Constants.Colors.yellow:Constants.Colors.textsPrimary}  />
+         <Text style={styles.scanButtomText}>Pontos</Text>
        </View>
       </TouchableOpacity>}
       {routeName!="UserPoints" &&<TouchableOpacity
       style={styles.scanButtom}
         onPress={() => navigate('UserPoints')}>
        <View style={styles.scanButtomContainer}>
-         <CoinIcone style={{height:35,width:35}}/>
-       {/* <MaterialCommunityIcons name="coin" size={25} color={props.activePoints?props.activePoints:Constants.Colors.textsPrimary}  /> */}
+         {routeName=="UserPoints"?<CoinIconActive style={{height:35,width:35}}/>:
+         <CoinIcone style={{height:35,width:35}}/>}
+         
        <Text style={styles.scanButtomText}>Points</Text>
        </View>
       </TouchableOpacity>}

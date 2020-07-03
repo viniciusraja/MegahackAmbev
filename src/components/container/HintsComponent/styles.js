@@ -17,18 +17,19 @@ export const styles = StyleSheet.create({
       borderTopRightRadius:20,
     },
     hintsHeader:{
-      flexDirection:'row',
+      paddingHorizontal:10,
       justifyContent:'center',
       alignItems:'center',
-      height:220,
+      height:190,
       width:"100%",
     },
   hintsTitle:{
     alignSelf:'flex-start',
-    width:150,
-    height:220,
+    width:"100%",
+    textAlign:'center',
+    height:70,
     color:Constants.Colors.textsPrimary,
-    fontSize:Constants.fontSizeLarge,
+    fontSize:25,
     fontFamily:Constants.fontFamilyBold,
   },
   hintsDescription:{
@@ -45,11 +46,10 @@ export const styles = StyleSheet.create({
   hintsImageContainer:{
     height:150,
     width:150,
-    alignSelf:'flex-end',
+    alignSelf:'center',
     justifyContent:'center',
     alignItems:'center',
     borderRadius:75,
-    backgroundColor:Constants.Colors.backgroundColor,
   },
   hintsImage:{
     height:150,

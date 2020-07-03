@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor:Constants.Colors.yellow,
+    backgroundColor:Constants.Colors.backgroundColor,
   },
   
   input:{
@@ -23,8 +23,8 @@ export const styles = StyleSheet.create({
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 5,
     opacity:0.7,
-    },
-    userLevelContainer:{
+  },
+  userLevelContainer:{
     position:'absolute',
     height:15,
     width:15,
@@ -34,28 +34,27 @@ export const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     borderRadius:10,
-    },
-    userLevelText:{
+  },
+  userLevelText:{
       textAlign:'center',
       color:'#fff',
       fontFamily:Constants.fontFamilyXBold,
       fontSize:12,
     },
     loginButtonContainer:{
-    height:'100%',
-    width:45,
-    justifyContent:'center',
-    alignItems:'center'
+      height:'100%',
+      width:45,
+      justifyContent:'center',
+      alignItems:'center'
     },
     
+    
+    
+    
+    
 
-
-
-
-
-
-
-
+    
+    
     autoCompleteContainerToFixPosition: {
       position:'absolute',
       zIndex: 10,
@@ -91,29 +90,32 @@ export const styles = StyleSheet.create({
       height:600,
       backgroundColor: 'transparent',
       borderWidth: 0,
-      marginTop: 2,
+      marginTop: 15,
       width: '100%',
     },
     inputSearchCountryItemContainer: {
       flexDirection: 'row',
       justifyContent: 'flex-start',
       alignItems: 'center',
-      height: 60,
+      height: 55,
+      width:'100%',
       backgroundColor: '#F5F5F5',
-      borderRadius: 20,
+      backgroundColor:'red',
+      borderRadius: 30,
       marginVertical: 2,
     },
     inputSearchCountryFlagImage: {
-      height: 25,
+      height: 52,
       width: 35,
       borderRadius: 7,
       marginRight: 20,
-      marginLeft: 10,
+      marginLeft: 30,
     },
     inputSearchCountryText: {
-      fontFamily:Constants.fontFamily,
+      fontFamily:Constants.fontFamilybold,
       fontSize: 20,
       textAlign: 'center',
     },
-
-});
+    
+  });
+  

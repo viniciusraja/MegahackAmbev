@@ -47,7 +47,7 @@ const searchProducts=(search, allProducts)=> {
     return [];
   }
   search = search.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  const regex = new RegExp(`${search.trim()}`, 'i');
+  const regex = new RegExp(`^${search.trim()}`, 'i');
 
   return allProducts.filter((product) => {
     return (
@@ -73,12 +73,14 @@ const getTotalPriceOfCart = (cartList) => {
 const Header = (props) => {
   const productsList = useSelector((state) => state.getProductsList.productsList);
   const userInfo= useSelector(state => (state.getUserInfo.userInfo))
-  const allProducts=[...productsList]
+  const allCategories=productsList.map((category)=>category.products)
+  const allProducts=allCategories.reduce((list, sub) => list.concat(sub), [])
   const cartList = useSelector((state) => state.getCartList.cartList);
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
   const { navigate } = useNavigation();
   const products = searchProducts(search,allProducts);
+  console.log(products)
   const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
   let total = getTotalPriceOfCart(cartList);
   return (
@@ -96,7 +98,7 @@ const Header = (props) => {
                 listContainerStyle={styles.listContainerStyle}
                 listStyle={styles.listStyle}
                 data={
-                  products.length === 1 && comp(search, products.productsList.name)
+                  products.length === 1 && comp(search, products[0].name)
                     ? []
                     : products
                 }
@@ -108,21 +110,27 @@ const Header = (props) => {
                   if (index < 4) {
                     return (
                       <TouchableOpacity
+                      style={[styles.inputSearchCountryItemContainer]}
                         onPress={() => {
-                          setSearch(item.name)
-                            Keyboard.dismiss();
+                          console.log('aaaaaa')
+                          setSearch(item.name),
+                          navigate('ProducItemDescription', {
+                            props:item,
+                          }),
+                          Keyboard.dismiss()
                         }}>
-                        <View style={styles.inputSearchCountryItemContainer}>
-                          {/* <Image
+                        
+                           <Image
                             style={styles.inputSearchCountryFlagImage}
                             source={{
-                              uri: item.countryInfo.flag,
+                              uri: item.image,
                             }}
-                          /> */}
+                            resizeMode='contain'
+                          /> 
                           <Text style={styles.inputSearchCountryText}>
                             {item.name}
                           </Text>
-                        </View>
+                       
                       </TouchableOpacity>
                     );
                   }
@@ -134,7 +142,7 @@ const Header = (props) => {
 
 
       <TouchableOpacity
-        onPress={() => dispatch(showLoginComponent())}
+        onPress={() => !!userInfo?dispatch(showLoginComponent()):navigate('UserInfoScreen')}
         style={styles.loginButtonContainer}>
         {!!userInfo.picture?
           <Image

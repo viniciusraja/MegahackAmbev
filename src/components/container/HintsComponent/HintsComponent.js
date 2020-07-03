@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -17,18 +17,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from 'react-navigation-hooks';
 import Constants from 'config/constants/Constants';
 import { showHintComponent } from 'store/ducks/actions/showComponent';
+import api from 'services/api';
+import CoinIcone from 'assets/svg/CoinIcone.svg'
 
 
 const HintsComponent = (props) => {
-  const [search, setSearch] = useState('');
+  console.log(props.qrCodeData, 'hints component')
+  const [hintData, setHintData] = useState('');
   const dispatch = useDispatch();
   const hintIsOpened = useSelector(
     (state) => state.showComponent.hintContainer
   );
   const { navigate } = useNavigation();
+
+  useEffect(() => {
+    (async () => {
+      const data = await api
+      .get(`${props.qrCodeData}`)
+      .then((res)=>setHintData(res.data))
+      .catch(error=>console.log(error))
+      if(!!data)setHintData(data)
+    })();
+  }, [hintIsOpened]);
+
+
   return (
     <>
-    { true? (
+    { (hintIsOpened&&(hintData.message=='ok'))? (
       <View style={styles.hintContainer}>
          <TouchableOpacity
             onPress={() => dispatch(showHintComponent())}
@@ -40,20 +55,20 @@ const HintsComponent = (props) => {
             />
           </TouchableOpacity>
           <View style={styles.hintsHeader}>
-          <Text style={styles.hintsTitle}>Pão De Queijo</Text>
+          <Text style={styles.hintsTitle}>{hintData.object.title}</Text>
           <View style={styles.hintsImageContainer}>
 
           <Image style={styles.hintsImage}
-                  source={require('assets/images/ambevProducts.png')}
+                  source={{uri:hintData.object.url}}
                   resizeMode="cover"
                   />
                   </View>
                   </View>
-          <Text style={styles.hintsDescription}>Loremasc assc iic asjicnbiasc ascas csaa sc as c asc asc as c asc as c asc as cascascasc ascascas ei ajcnoabownc awocjnaowc awojcnoawnc awojncoanw awcjn awcoinaw oawncl j oawnc</Text>
+    <Text style={styles.hintsDescription}>{hintData.object.description}</Text>
 
       </View>
     ) : (
-      <View />
+      <CoinIcone />
     )}
   </>
   );
