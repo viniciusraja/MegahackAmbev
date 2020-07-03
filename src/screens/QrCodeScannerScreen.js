@@ -8,13 +8,15 @@ import { useNavigation } from 'react-navigation-hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { showHintComponent } from 'store/ducks/actions/showComponent';
 import HintsComponent from 'components/container/HintsComponent'
+import api from 'services/api';
+
 export default function QrCodeScannerScreen() {
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [hintComponent, setHintComponent] = useState(false);
-  const [navigationData, setNavigationData] = useState('');
+  const [qrCodeData, setQrCodeData] = useState('');
   
   useEffect(() => {
     (async () => {
@@ -23,18 +25,30 @@ export default function QrCodeScannerScreen() {
     })();
   }, []);
   
-  useEffect(() =>{
-    if(!!navigationData.route)navigate(`${navigationData.route}`)
-  }, [navigationData]);
-  
-  const handleBarCodeScanned = async ({ type, data }) => {
+  // useEffect(() =>{
+  //   if(!!navigationData.route)navigate(`${navigationData.route}`)
+  // }, [navigationData]);
+  const sendUserPointsForRecycling= async(qrCodeUUID)=>{
+   console.log('userCheckPointsqrcodescanner')
     try{
-      const navigationData= JSON.parse(data)
+      api
+      .get(`recycling/${qrCodeUUID}`,{headers:{'user':1}})
+    .then(res=>res.data)
+    .then(res=>{if(res=='ok')navigate(`UserPoints`)})
+    .catch(error=>console.log(error))
+    }catch(error){
+      Alert.alert(error)
+    }
+  }
+
+  const handleBarCodeScanned = async ({ type, data }) => {
+    const qrCodeUUID=data
+    try{
     setScanned(true);
-    setNavigationData(navigationData)
+    setQrCodeData(qrCodeUUID)
   }catch(error){console.log(error)}
-  if(!!navigationData.route)navigate(`${navigationData.route}`)
-  if(!!navigationData.hint)dispatch(showHintComponent())
+  if(qrCodeData.split('/')[0]=='advertisement'){dispatch(showHintComponent())
+  }else{sendUserPointsForRecycling(qrCodeUUID)}
   // Alert.alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
@@ -59,10 +73,10 @@ export default function QrCodeScannerScreen() {
       <TouchableOpacity onPress={() => setScanned(false)}
       style={styles.scanAgainButtom}
       >
-      <Text style={styles.scanAgainButtomText}>SCAN</Text>
+      <Text style={styles.scanAgainButtomText}>Tente de Novo</Text>
       </TouchableOpacity>}
     </View>
-    <HintsComponent/>
+    <HintsComponent qrCodeData={qrCodeData} />
     <FooterNavBar activeQr={Constants.Colors.yellow}/>
     
     </>
@@ -87,6 +101,6 @@ const styles = StyleSheet.create({
   scanAgainButtomText:{
     color:Constants.Colors.backgroundColor,
     fontFamily:Constants.fontFamilyXBold,
-    fontSize:22,
+    fontSize:17,
   }
 })

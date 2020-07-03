@@ -35,14 +35,12 @@ class HomeScreen extends Component {
       productsList:''
     };
   }
-  shouldComponentRender = () => {};
   componentDidMount=async()=>{
-    const token = await SecureStore.getItemAsync('userToken');
-    await this.props.fetchProductsList('/categories');
+    await this.props.fetchProductsList('/category');
   }
   componentDidUpdate=async(prevProps, prevState)=>{
     if (prevProps.shouldUpdateList!==this.props.shouldUpdateList){
-      await this.props.fetchProductsList('/categories');
+      await this.props.fetchProductsList('/category');
       console.log('entrou')
     }
   };
@@ -76,9 +74,10 @@ class HomeScreen extends Component {
               categoryId={item.id}
               productsListTitle={item.title}
               productsListSubtitle={item.subtitle}
-              products={item.productsList}
+              products={item.products}
             />
           )}
+          ListFooterComponent={<View style={{height:Constants.Layout.footerHeight}}/>}
           keyExtractor={(item) => `${item.id}`}
           showsVerticalScrollIndicator={false}
         />
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor: Constants.Colors.backgroundColor,
   },
   header: {},
-  categoriesList: {},
+  productsList: {width:'100%'},
   
   headerImageContainer: {
     width: '95%',

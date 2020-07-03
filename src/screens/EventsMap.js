@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import {
   Ionicons,
@@ -21,41 +22,45 @@ import { useNavigation } from 'react-navigation-hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import MapView from 'react-native-maps';
 import FooterNavBar from 'components/container/FooterNavBar';
+import api from 'services/api';
 
 const EventsMap = (props) => {
   const dispatch= useDispatch()
   const {navigate} = useNavigation();
   const cartList= useSelector(state => (state.getCartList.cartList))
-  const  markers= [{
-    id:1,
-    title: 'Ambev Recicla',
-    coordinates: {
-      latitude:-5.895159, 
-      longitude:-35.215708,
-    },
-  },
-  { id:2,
-    title: 'hello',
-    coordinates: {
-      latitude:-5.864159, 
-      longitude:-35.215708,
-    },  
-  }]
-  const  recicla= [{
-    id:1,
-    title: 'Ambev Recicla',
-    coordinates: {
-      latitude:-5.845159, 
-      longitude:-35.225708,
-    },
-  },
-  { id:2,
-    title: 'hello',
-    coordinates: {
-      latitude:-5.834159, 
-      longitude:-35.245708,
-    },  
-  }]
+  const [eventsMarkers,setEventsMarkers]=useState('')
+  const [popUpInformation,setPopUpInformation]=useState('')
+  const [moreInformationIsOpened,setMoreInformationIsOpened]=useState(false)
+  const [recycleMarkers,setRecycleMarkers]=useState('')
+  
+  useEffect(() =>{
+     
+    (async()=>
+    {
+      try{
+     await api
+      .get(`recycle`)
+      .then(res=>res.data.object)
+      .then(data=>setRecycleMarkers(data))
+    .catch(error=>console.log(error))
+    }catch(error){
+      Alert.alert(error)
+    }
+    })(),
+    (async()=>
+    {
+      try{
+      await api
+      .get(`event`)
+      .then(res=>res.data.object)
+      .then(data=>setEventsMarkers(data))
+    .catch(error=>console.log(error))
+    }catch(error){
+      Alert.alert(error)
+    }
+    })()
+    }, []);
+ 
   return (
     <View style={styles.container}>
       <MapView style={styles.mapStyle} 
@@ -66,28 +71,66 @@ const EventsMap = (props) => {
       longitudeDelta: 0.0421,
       }}
       >
-      {markers.map(marker => (
-    <MapView.Marker 
-      coordinate={marker.coordinates}
-      title={marker.title}
-    >
-      <View style={{height:35, width:35, backgroundColor:'#000', borderRadius:20, justifyContent:'center', alignItems:'center'}}>
-
-      <Ionicons name="ios-beer" size={25} color={Constants.Colors.yellow} />
-      </View>
-    </MapView.Marker>
-    ))}
-      {recicla.map(marker => (
-    <MapView.Marker 
-      coordinate={marker.coordinates}
-      title={marker.title}
-    >
+    
+    {!!recycleMarkers&&recycleMarkers.map(marker => {
+      console.log(marker)
+      const eventsCoordinates={latitude:marker.latitude,longitude:marker.longitude}
+      return(
+        <MapView.Marker 
+        key={marker.id}
+        coordinate={eventsCoordinates}
+        title={marker.title}
+        >
       <View style={{height:35, width:35, backgroundColor:'#000', borderRadius:20, justifyContent:'center', alignItems:'center'}}>
       <FontAwesome name="recycle" size={25} color={Constants.Colors.yellow} />
       </View>
-    </MapView.Marker>
-    ))}
+        <MapView.Callout style={{height:80,width:220}}>
+          <View style={{height:80,width:220, backgroundColor:"#FFF", justifyContent:'center', alignItems:'center'}}>
+            <Text style={{textAlign:'center', fontFamily:Constants.fontFamilyBold, fontSize:14}}>{marker.name}</Text>
+            <Text style={{textAlign:'center', fontFamily:Constants.fontFamily}}>{marker.description}</Text>
+          </View>
+        </MapView.Callout>
+     
+    </MapView.Marker>)
+    })}
+    {!!eventsMarkers&&eventsMarkers.map(marker => {
+      const eventsCoordinates={latitude:marker.latitude,longitude:marker.longitude}
+      return(
+        <MapView.Marker 
+        key={marker.id}
+        coordinate={eventsCoordinates}
+        title={marker.title}
+        >
+       <View style={{height:35, width:35, backgroundColor:'#000', borderRadius:20, justifyContent:'center', alignItems:'center'}}>
+
+<Ionicons name="ios-beer" size={25} color={Constants.Colors.yellow} />
+</View> 
+        <MapView.Callout style={{height:90,width:230,}}
+        onPress={()=>{setPopUpInformation({description:marker.description,url:marker.image})
+                      setMoreInformationIsOpened(true)}}>
+          <View style={{height:90,width:230, backgroundColor:"#FFF", justifyContent:'center', alignItems:'center'}}>
+            <Text style={{textAlign:'center', fontFamily:Constants.fontFamilyBold, fontSize:14}}>{marker.title}</Text>
+            <Text style={{textAlign:'center', fontFamily:Constants.fontFamilyBold}}>{marker.date}</Text>
+            <Text style={{textAlign:'center', fontFamily:Constants.fontFamily}}>{marker.subtitle}</Text>
+          </View>
+        </MapView.Callout>
+     
+    </MapView.Marker>)
+    })}
         </MapView>
+        
+        {moreInformationIsOpened&&<View style={styles.moreInformationContainer}>
+        <TouchableOpacity
+            onPress={() =>setMoreInformationIsOpened(false)}
+            style={{ position:'absolute', right:10, top:5 }}>
+            <AntDesign
+              name="close"
+              size={25}
+              color={Constants.Colors.lightGrey}
+            />
+          </TouchableOpacity>
+          <Text style={styles.moreInformationText}>{popUpInformation.description}</Text>
+        </View>}
       <LoginContainer />
       <FooterNavBar />
     </View>
@@ -106,62 +149,22 @@ const styles = StyleSheet.create({
     width:Constants.Layout.window.width,
     height:Constants.Layout.window.height
   },
-  cartItemHeaderAndFooterContainer:{
-    flexDirection:'row',
-    height:30,
-    width:'90%',
-    borderRadius:15,
-    marginVertical:5,
-    backgroundColor:Constants.Colors.yellow,
-    justifyContent:'space-around',
-  },
-  productNameContainer:{
-    width:'40%',
-    height:'100%',
+  moreInformationContainer:{
+    height:350,
     justifyContent:'center',
     alignItems:'center',
+    width:250,
+    borderRadius:20,
+    backgroundColor:"#FFF",
+    position:'absolute',
+    top:(Constants.Layout.window.height-Constants.Layout.footerHeight-350)/2,
+    padding:12,
   },
-  productNameText:{
-    width:'100%',
-    height:'100%',
-    fontFamily: Constants.fontFamily,
-    fontSize: 22,
+  moreInformationText:{
+    
     textAlign:'center',
-    textAlignVertical:'center',
-  },
-  productQuantityContainer:{
-    width:'15%',
-    height:'100%',
-    justifyContent:'center',
-    alignItems:'center',
-  },
-  productPriceContainer:{
-    width:'20%',
-    height:'100%',
-    justifyContent:'center',
-    alignItems:'center',
-  },
-  productQuantityAndPriceText:{
-    width:'100%',
-    height:'100%',
-    fontFamily: Constants.fontFamily,
-    fontSize: 22,
-    textAlign:'center',
-    textAlignVertical:'center',
-  },
-  productTotalContainer:{
-    width:'25%',
-    height:'100%',
-    justifyContent:'center',
-    alignItems:'center',
-  },
-  productsTotalPriceText:{
-    width:'100%',
-    height:'100%',
-    fontFamily: Constants.fontFamily,
-    fontSize: 22,
-    textAlign:'center',
-    textAlignVertical:'center',
+    fontFamily:Constants.fontFamily,
+    fontSize:Constants.fontSizeMedium,
   },
   
 });
