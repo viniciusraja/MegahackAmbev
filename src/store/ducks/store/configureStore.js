@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware} from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import showComponent from '../reducers/showComponentReducer';
 import getProductsList from '../reducers/productsListReducer';
 import getGoals from '../reducers/goalsReducer';
@@ -11,7 +11,6 @@ const rootReducer = combineReducers({
   getGoals,
 });
 
-const configureStore = () =>
-  createStore(rootReducer, applyMiddleware(thunk));
+const configureStore = () => createStore(rootReducer, applyMiddleware(thunk));
 
 export default configureStore;

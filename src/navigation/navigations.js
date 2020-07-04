@@ -8,70 +8,69 @@ import Header from 'components/container/Header';
 import { SharedElement } from 'react-native-shared-element';
 import QrCodeScannerScreen from 'screens/QrCodeScannerScreen';
 import UserPoints from 'screens/UserPoints';
-import EventsMap from 'screens/EventsMap'
-const AppNavigator = createSharedElementStackNavigator(
-  {
-    Home: {
-      screen: HomeScreen,
-      defaultNavigationOptions: {
-        cardStyleInterpolator: ({ current: { progress } }) => {
-          return {
-            cardStyle: {
-              opacity: progress,
-              color: progress,
-              backgroundColor: progress,
-            },
-          };
-        },
-        cardStyle: {
-          backgroundColor: 'transparent',
-        },
+import EventsMap from 'screens/EventsMap';
+import Constants from 'config/constants/Constants';
+const AppNavigator = createSharedElementStackNavigator({
+  Home: {
+    screen: HomeScreen,
+    defaultNavigationOptions: {
+      cardStyleInterpolator: ({ current: { progress } }) => {
+        return {
+          cardStyle: {
+            opacity: progress,
+            color: progress,
+            backgroundColor: progress,
+          },
+        };
       },
-      navigationOptions: {
-        header: () => <Header />,
+      cardStyle: {
+        backgroundColor: 'transparent',
       },
     },
+    navigationOptions: {
+      header: () => <Header />,
+    },
+  },
 
-    ProducItemDescription: {
-      screen: ProducItemDescription,
-      defaultNavigationOptions: {
-        cardStyleInterpolator: ({ current: { progress } }) => {
-          return {
-            cardStyle: {
-              opacity: progress,
-              color: progress,
-              backgroundColor: progress,
-            },
-          };
-        },
-        cardStyle: {
-          backgroundColor: 'transparent',
-        },
+  ProducItemDescription: {
+    screen: ProducItemDescription,
+    defaultNavigationOptions: {
+      cardStyleInterpolator: ({ current: { progress } }) => {
+        return {
+          cardStyle: {
+            opacity: progress,
+            color: progress,
+            backgroundColor: progress,
+          },
+        };
       },
-      navigationOptions: {
-        header: () => <Header />,
+      cardStyle: {
+        backgroundColor: 'transparent',
       },
     },
-    EventsMap: {
-      screen: EventsMap,
-      navigationOptions: {
-        headerShown:false
-      },
+    navigationOptions: {
+      header: () => <Header />,
     },
-    QrCodeScannerScreen: {
-      screen: QrCodeScannerScreen,
-      navigationOptions: {
-        header: () => <Header />,
-      },
+  },
+  EventsMap: {
+    screen: EventsMap,
+    navigationOptions: {
+      headerShown: false,
     },
-    UserPoints: {
-      screen: UserPoints,
-      navigationOptions: {
-        header: () => <Header />,
-      },
+  },
+  QrCodeScannerScreen: {
+    screen: QrCodeScannerScreen,
+    navigationOptions: {
+      headerShown: false,
     },
-  }
-);
+  },
+  UserPoints: {
+    screen: UserPoints,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+});
 
 const Router = createAppContainer(AppNavigator);
 

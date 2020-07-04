@@ -30,7 +30,7 @@ function fetchProductsListSuccess(data) {
     payload: data,
   };
 }
- function fetchProductsList(req) {console.log('entrou na action produtos')
+ function fetchProductsList(req) {
    return (dispatch) => {
       dispatch(fetchProductsListPending())
       api
