@@ -8,8 +8,6 @@ import {
   Image,
 } from 'react-native';
 
-import * as Google from 'expo-google-app-auth';
-import * as Facebook from 'expo-facebook';
 import { SimpleLineIcons, FontAwesome, AntDesign } from '@expo/vector-icons';
 import { styles } from './styles';
 import Constants from 'config/constants/Constants';

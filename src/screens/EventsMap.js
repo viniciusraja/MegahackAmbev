@@ -22,6 +22,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import MapView from 'react-native-maps';
 import FooterNavBar from 'components/container/FooterNavBar';
 import api from 'services/api';
+import * as Location from 'expo-location';
+import LoadingCoin from 'components/presentational/LoadingCoin';
 
 const EventsMap = (props) => {
   const dispatch = useDispatch();
@@ -30,6 +32,20 @@ const EventsMap = (props) => {
   const [popUpInformation, setPopUpInformation] = useState('');
   const [moreInformationIsOpened, setMoreInformationIsOpened] = useState(false);
   const [recycleMarkers, setRecycleMarkers] = useState('');
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  });
 
   useEffect(() => {
     (async () => {
@@ -56,13 +72,15 @@ const EventsMap = (props) => {
       })();
   }, []);
 
+  if(errorMsg){Alert.alert("Houve algum Erro para conseguir sua localização!")}
   return (
-    <View style={styles.container}>
+    
+    location||errorMsg?<View style={styles.container}>
       <MapView
         style={styles.mapStyle}
         initialRegion={{
-          latitude: -5.864159,
-          longitude: -35.215708,
+          latitude: location.coords.latitude||-15.7801,
+          longitude: location.coords.longitude||-47.9292,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}>
@@ -211,7 +229,7 @@ const EventsMap = (props) => {
       )}
       <LoginContainer />
       <FooterNavBar />
-    </View>
+    </View>:<LoadingCoin/>
   );
 };
 
