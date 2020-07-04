@@ -3,117 +3,106 @@ import Constants from '../../../config/constants/Constants';
 
 export const styles = StyleSheet.create({
   headerContainer: {
-    height:Constants.Layout.headerHeight,
-    width:'100%',
-    flexDirection:'row',
+    height: Constants.Layout.headerHeight,
+    width: '100%',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor:Constants.Colors.backgroundColor,
+    backgroundColor: Constants.Colors.backgroundColor,
   },
-  
-  input:{
-    height:40,
+
+  input: {
+    height: 40,
     width: '70%',
-    paddingLeft:10,
+    paddingLeft: 10,
     textAlign: 'left',
     color: '#FFF',
-    backgroundColor:'#fff',
-    borderRadius:30,
+    backgroundColor: '#fff',
+    borderRadius: 30,
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 5,
-    opacity:0.7,
+    opacity: 0.7,
   },
-  userLevelContainer:{
-    position:'absolute',
-    height:15,
-    width:15,
-    bottom:6,
-    right:5,
-    backgroundColor:Constants.Colors.yellow,
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius:10,
+  userLevelContainer: {
+    position: 'absolute',
+    height: 15,
+    width: 15,
+    bottom: 6,
+    right: 5,
+    backgroundColor: Constants.Colors.yellow,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
   },
-  userLevelText:{
-      textAlign:'center',
-      color:'#fff',
-      fontFamily:Constants.fontFamilyXBold,
-      fontSize:12,
-    },
-    loginButtonContainer:{
-      height:'100%',
-      width:45,
-      justifyContent:'center',
-      alignItems:'center'
-    },
-    
-    
-    
-    
-    
+  userLevelText: {
+    textAlign: 'center',
+    color: '#fff',
+    fontFamily: Constants.fontFamilyXBold,
+    fontSize: 12,
+  },
+  loginButtonContainer: {
+    height: '100%',
+    width: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
-    
-    
-    autoCompleteContainerToFixPosition: {
-      position:'absolute',
-      zIndex: 100,
-      right:10,
-      top:(Constants.Layout.headerHeight-40)/2,
-    },
-    inputSearchProductContainer: {
-      height: 40,
-      width: '100%',
-      borderRadius: 20,
-      backgroundColor: '#F5F5F5',
-      elevation: 7,
-      fontFamily: Constants.fontFamily,
-      fontSize: 20,
-      textAlign: 'center',
-    },
-    inputContainerStyle: {
-      height: 29,
-      width: 300,
-      borderWidth: 0,
-      borderRadius: 20,
-    },
-    containerStyle: {
-      
-    },
-    listContainerStyle: {
-      justifyContent:'center',
-      alignItems:'center',
-    },
-    listStyle: {
-      height:600,
-      backgroundColor: 'transparent',
-      borderWidth: 0,
-      marginTop: 15,
-      width: '100%',
-    },
-    inputSearchCountryItemContainer: {
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-      height: 55,
-      width:'100%',
-      backgroundColor: '#F5F5F5',
-      // backgroundColor:'red',
-      borderRadius: 30,
-      marginVertical: 2,
-    },
-    inputSearchCountryFlagImage: {
-      height: 52,
-      width: 35,
-      borderRadius: 7,
-      marginRight: 20,
-      marginLeft: 30,
-    },
-    inputSearchCountryText: {
-      fontFamily:Constants.fontFamilybold,
-      fontSize: 20,
-      textAlign: 'center',
-    },
-    
-  });
-  
+  autoCompleteContainerToFixPosition: {
+    position: 'absolute',
+    zIndex: 100,
+    right: 10,
+    top: (Constants.Layout.headerHeight - 40) / 2,
+  },
+  inputSearchProductContainer: {
+    height: 40,
+    width: '100%',
+    borderRadius: 20,
+    backgroundColor: '#F5F5F5',
+    elevation: 7,
+    fontFamily: Constants.fontFamily,
+    fontSize: 20,
+    textAlign: 'center',
+  },
+  inputContainerStyle: {
+    height: 29,
+    width: 300,
+    borderWidth: 0,
+    borderRadius: 20,
+  },
+  containerStyle: {},
+  listContainerStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  listStyle: {
+    height: 600,
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    marginTop: 15,
+    width: '100%',
+  },
+  inputSearchCountryItemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    height: 55,
+    width: '100%',
+    backgroundColor: '#F5F5F5',
+    // backgroundColor:'red',
+    borderRadius: 30,
+    marginVertical: 2,
+  },
+  inputSearchCountryFlagImage: {
+    height: 52,
+    width: 35,
+    borderRadius: 7,
+    marginRight: 20,
+    marginLeft: 30,
+  },
+  inputSearchCountryText: {
+    fontFamily: Constants.fontFamilybold,
+    fontSize: 20,
+    textAlign: 'center',
+  },
+});

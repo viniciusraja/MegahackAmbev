@@ -12,12 +12,8 @@ import * as Google from 'expo-google-app-auth';
 import * as Facebook from 'expo-facebook';
 import { SimpleLineIcons, FontAwesome, AntDesign } from '@expo/vector-icons';
 import { styles } from './styles';
-import Constants from '../../../config/constants/Constants';
-import {
-  googleIosClientId,
-  googleAndroidClientId,
-  facebookId,
-} from 'config/constants/constantsKeys';
+import Constants from 'config/constants/Constants';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import { showLoginComponent } from 'store/ducks/actions/showComponent';
@@ -28,8 +24,10 @@ import * as SecureStore from 'expo-secure-store';
 import Base64 from 'Base64';
 
 const LoginContainer = (props) => {
-   const dispatch = useDispatch();
-   const decoded = Base64.atob("eyJpYXQiOjE1OTM4MjA0MzksImV4cCI6MTU5NzQxNjgzOSwic3ViIjoxfQ");
+  const dispatch = useDispatch();
+  const decoded = Base64.atob(
+    'eyJpYXQiOjE1OTM4MjA0MzksImV4cCI6MTU5NzQxNjgzOSwic3ViIjoxfQ'
+  );
   const [userEmail, setUserEmail] = useState('');
   const [userName, setUserName] = useState('');
   const [userCPF, setUserCPF] = useState('');
@@ -39,15 +37,20 @@ const LoginContainer = (props) => {
     (state) => state.showComponent.loginContainer
   );
   const userInfo = useSelector((state) => state.getUserInfo.userInfo);
-  function parseJwt (token) {
+  function parseJwt(token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(Base64.atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
+    var jsonPayload = decodeURIComponent(
+      Base64.atob(base64)
+        .split('')
+        .map(function (c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join('')
+    );
 
     return JSON.parse(jsonPayload);
-};
+  }
   async function logInWithAPI() {
     try {
       api
@@ -57,12 +60,13 @@ const LoginContainer = (props) => {
         })
         .then(async (res) => {
           SecureStore.setItemAsync('userToken', res.data.token);
-          const {sub}={...parseJwt(await SecureStore.getItemAsync("userToken"))}
-          console.log(sub)
-          dispatch(fetchUserInfo(`user/${sub}`))
+          const { sub } = {
+            ...parseJwt(await SecureStore.getItemAsync('userToken')),
+          };
+          console.log(sub);
+          dispatch(fetchUserInfo(`user/${sub}`));
         })
         .catch((err) => console.log(err));
-
     } catch (error) {
       console.log(error);
     }
@@ -74,50 +78,61 @@ const LoginContainer = (props) => {
           name: userName,
           password: userPassword,
           cpf: userCPF,
-          email:userEmail,
+          email: userEmail,
         })
         .then(async (res) => {
           SecureStore.setItemAsync('userToken', res.data.token);
-          const {sub}={...parseJwt(await SecureStore.getItemAsync("userToken"))}
-          dispatch(fetchUserInfo(`user/${sub}`))
+          const { sub } = {
+            ...parseJwt(await SecureStore.getItemAsync('userToken')),
+          };
+          dispatch(fetchUserInfo(`user/${sub}`));
         })
         .catch((err) => console.log(err));
-
     } catch (error) {
       console.log(error);
     }
   }
   return (
     <>
-      {loginIsOpened&&!userInfo&&(
+      {loginIsOpened && !userInfo.name && (
         <View style={styles.loginContainer}>
-
           <View style={styles.inputsAndUserImgContainer}>
-           <View style={{top:-10,borderTopLeftRadius:10,borderTopRightRadius:10,backgroundColor:Constants.Colors.yellow, width:'100%', height:120, justifyContent:'center', alignItems:'center',}}>
-             
-            <FontAwesome
-              name="user-circle"
-              size={75}
-              color={Constants.Colors.backgroundColor}
+            <View
+              style={{
+                top: -10,
+                borderRadius:30,
+                elevation:7,
+                backgroundColor: Constants.Colors.yellow,
+                width: '100%',
+                height: 120,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <FontAwesome
+                name="user-circle"
+                size={75}
+                color={Constants.Colors.backgroundColor}
               />
-          <TouchableOpacity
-            onPress={() => dispatch(showLoginComponent())}
-            style={{ position:'absolute', right:10, top:10 }}>
-            <AntDesign
-              name="close"
-              size={25}
-              color={Constants.Colors.lightGrey}
-            />
-          </TouchableOpacity>
-              </View>
+              <TouchableOpacity
+                onPress={() => dispatch(showLoginComponent())}
+                style={{ position: 'absolute', right: 10, top: 10 }}>
+                <AntDesign
+                  name="close"
+                  size={25}
+                  color={Constants.Colors.lightGrey}
+                />
+              </TouchableOpacity>
+            </View>
             <View style={styles.signInContainer}>
-              {createAccountIsOppened&&<TextInput
-                style={styles.input}
-                placeholder=" Nome"
-                placeholderTextColor={Constants.Colors.lightGrey}
-                onChangeText={(text) => setUserName(text)}
-                defaultValue={userName}
-              />}
+              {createAccountIsOppened && (
+                <TextInput
+                  style={styles.input}
+                  placeholder=" Nome"
+                  placeholderTextColor={Constants.Colors.lightGrey}
+                  onChangeText={(text) => setUserName(text)}
+                  defaultValue={userName}
+                />
+              )}
               <TextInput
                 style={styles.input}
                 placeholder=" Email"
@@ -125,14 +140,17 @@ const LoginContainer = (props) => {
                 onChangeText={(text) => setUserEmail(text)}
                 defaultValue={userEmail}
               />
-              {createAccountIsOppened&&<TextInput
-                style={styles.input}
-                placeholder="CPF"
-                placeholderTextColor={Constants.Colors.lightGrey}
-                onChangeText={(text) => setUserCPF(text)}
-                defaultValue={userCPF}
-              />}
+              {createAccountIsOppened && (
+                <TextInput
+                  style={styles.input}
+                  placeholder="CPF"
+                  placeholderTextColor={Constants.Colors.lightGrey}
+                  onChangeText={(text) => setUserCPF(text)}
+                  defaultValue={userCPF}
+                />
+              )}
               <TextInput
+                secureTextEntry={true}
                 style={styles.input}
                 placeholder="Password"
                 placeholderTextColor={Constants.Colors.lightGrey}
@@ -140,36 +158,41 @@ const LoginContainer = (props) => {
                 defaultValue={userPassword}
               />
 
-              {!createAccountIsOppened?<TouchableOpacity
-                style={styles.signInButton}
-                onPress={() => logInWithAPI()}>
-                <View style={styles.signInButtonContainer}>
-                  <SimpleLineIcons name="login" size={18} color="green" />
-                  <Text style={styles.signInButtonText}>Sign In</Text>
-                </View>
-              </TouchableOpacity>:
-              <TouchableOpacity
-                style={styles.signInButton}
-                onPress={() => logInWithAPI()}>
-                <View style={styles.signInButtonContainer}>
-                  <SimpleLineIcons name="login" size={18} color="green" />
-                  <Text style={styles.signInButtonText}>Sing Up</Text>
-                </View>
-              </TouchableOpacity>}
+              {!createAccountIsOppened ? (
+                <TouchableOpacity
+                  style={styles.signInButton}
+                  onPress={() => logInWithAPI()}>
+                  <View style={styles.signInButtonContainer}>
+                    <SimpleLineIcons name="login" size={18} color="green" />
+                    <Text style={styles.signInButtonText}>Sign In</Text>
+                  </View>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.signInButton}
+                  onPress={() => logInWithAPI()}>
+                  <View style={styles.signInButtonContainer}>
+                    <SimpleLineIcons name="login" size={18} color="green" />
+                    <Text style={styles.signInButtonText}>Sing Up</Text>
+                  </View>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
 
-          
-           {!createAccountIsOppened?<TouchableOpacity style={styles.createAccountButton}
-            onPress={()=>setCreateAccountIsOppened(true)}
-            >
+          {!createAccountIsOppened ? (
+            <TouchableOpacity
+              style={styles.createAccountButton}
+              onPress={() => setCreateAccountIsOppened(true)}>
               <Text style={styles.createAcountText}> Create Account</Text>
-            </TouchableOpacity>:
-            <TouchableOpacity style={styles.createAccountButton}
-            onPress={()=>setCreateAccountIsOppened(false)}
-            >
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.createAccountButton}
+              onPress={() => setCreateAccountIsOppened(false)}>
               <Text style={styles.createAcountText}>Fazer Login</Text>
-            </TouchableOpacity>}
+            </TouchableOpacity>
+          )}
         </View>
       )}
     </>
