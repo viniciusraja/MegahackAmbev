@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   Text,
   Image,
+  Alert,
 } from 'react-native';
 import {
   MaterialCommunityIcons,
@@ -11,7 +12,7 @@ import {
   Feather,
   AntDesign,
   SimpleLineIcons,
-  Entypo
+  FontAwesome5
 } from '@expo/vector-icons';
 import { styles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
@@ -67,9 +68,9 @@ const FooterNavBar = (props) => {
       </TouchableOpacity>}
       <TouchableOpacity
       style={styles.scanButtom}
-        onPress={() => navigate('QrCodeScannerScreen', { props:props })}>
+        onPress={() =>Alert.alert('Infelizmente esta função ainda não foi implementada!')}>
        <View style={[styles.scanButtomContainer]}>
-       <Entypo name="help" size={25} color={props.activeHelp?props.activeHelp:Constants.Colors.textsPrimary}  />
+       <FontAwesome5 name="whatsapp" size={29} color={props.activeHelp?props.activeHelp:Constants.Colors.textsPrimary}  />
        <Text style={styles.scanButtomText}>Ajuda</Text>
        </View>
       </TouchableOpacity>

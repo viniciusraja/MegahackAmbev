@@ -20,6 +20,7 @@ import { useNavigation } from 'react-navigation-hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart, removeItemToCart } from 'store/ducks/actions/cartList';
 import { showAdminProductConfigComponent } from 'store/ducks/actions/showComponent';
+import CoinIcone from 'assets/svg/CoinIcone.svg'
 
 function checkNumberOfItemsInCart(id) {
   const cartList = useSelector((state) => state.getCartList.cartList);
@@ -38,127 +39,43 @@ const ProductCard = (props) => {
   const dispatch = useDispatch();
   const { navigate } = useNavigation();
   const numberOfItemsInCart = checkNumberOfItemsInCart(props.id);
+  const imageURL=props.image
+  console.log(props.id)
   return (
-    <View>
+   
       <TouchableOpacity
         onPress={() =>
           navigate('ProducItemDescription', {
             props: props,
-            numberOfItemsInCart,
           })
         }
         style={styles.productCardButton}>
         <View style={styles.productCardContainer}>
           <View style={styles.productInformationContainer}>
           <View style={styles.productDetailsContainer}>
-            <SharedElement id={`item.${props.id}.price`}>
-              {/* <Text style={styles.productNameText}>{`R$${props.price}`}</Text> */}
-              <Text style={styles.productNameTitle}>BRAHMA</Text>
+            <SharedElement id={`item.${props.id}.title`}>
+            <Text style={styles.productNameTitle}>{`${props.name.toUpperCase()}`}</Text>
             </SharedElement>
-              <Text style={styles.productNameSubtitle}>ZERO</Text>
-              <Text style={styles.productVolume}>355ml</Text>
-              <View style={{flexDirection:'row', width:30,marginRight:10, alignSelf:'flex-end',justifyContent:'space-between'}}>
-                <MaterialCommunityIcons name="coin" size={21} color="black" />
-                <Text style={styles.productNameTitle}>3</Text>
+              {props.family!='-'&&<Text style={styles.productNameSubtitle}>{`${props.family}`}</Text>}
+              <Text style={styles.productVolume}>{`${props.milliliter}ml`}</Text>
+              <View style={{flexDirection:'row', width:30,marginRight:15, alignSelf:'flex-end',justifyContent:'space-between'}}>
+                <CoinIcone style={{height:21,width:21, marginRight:2}}/>
+                <Text style={styles.productNameTitle}>{`${props.points}`}</Text>
                 </View>
           </View>
           </View>
-            {/* <SharedElement id={`item.${props.id}.title`}>
-              <Text style={styles.productName}>{props.name}</Text>
-              <Text style={styles.productName}>600 ml </Text>
-            </SharedElement> */}
-          {true ? (
-          //só apagar em cima {!!props.url ? (
             <SharedElement
               id={`item.${props.id}.photo`}
               style={styles.productImageContainer}>
-             <Image
-              style={styles.productImage}
-              source={require('assets/images/brahma.png')}
-              resizeMode="contain"
-            />
-              {/* <Image
+              {imageURL?<Image
                 style={styles.productImage}
-                source={{ uri: props.url }}
-                resizeMode="contain"
-              /> */}
+                source={{ uri:imageURL}}
+                resizeMode='contain'
+              />: <CoinIcone style={{height:21,width:21, marginRight:2}}/>}
             </SharedElement>
-          ) : (
-            <View style={styles.productImageContainer}>
-              <MaterialCommunityIcons name="food" size={80} color="#FFF" />
-            </View>
-          )}
+          
         </View>
       </TouchableOpacity>
-      {numberOfItemsInCart > 0 && (
-        <View style={styles.quantityOfProductsContainer}>
-          <TouchableOpacity
-            style={styles.addIconContainer}
-            onPress={() => dispatch(removeItemToCart(props))}>
-            <Ionicons name="ios-remove" size={23} color="#fff" />
-          </TouchableOpacity>
-          <Text style={styles.quantityOfProductsText}>
-            {numberOfItemsInCart}
-          </Text>
-          <TouchableOpacity
-            style={styles.addIconContainer}
-            onPress={() => dispatch(addItemToCart(props))}>
-            <Ionicons name="ios-add" size={23} color="#fff" />
-          </TouchableOpacity>
-        </View>
-      )}
-
-      {/* <TouchableOpacity
-        style={{
-          position: 'absolute',
-          left: 20,
-          top: -15,
-          marginVertical: 30,
-          backgroundColor: Constants.Colors.lightGrey,
-          justifyContent: 'center',
-          alignItems: 'center',
-          alignSelf: 'center',
-          height: 45,
-          width: 45,
-          borderRadius: 45,
-        }}
-        onPress={() =>
-          dispatch(
-            showAdminProductConfigComponent({
-              categoryId: props.categoryId,
-              ...props,
-              editingProduct: false
-            })
-          )
-        }>
-        <MaterialCommunityIcons name="image-plus" size={24} color="#FFF" />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{
-          position: 'absolute',
-          right: 0,
-          bottom: 40,
-          marginVertical: 30,
-          backgroundColor: Constants.Colors.lightGrey,
-          justifyContent: 'center',
-          alignItems: 'center',
-          alignSelf: 'center',
-          height: 45,
-          width: 45,
-          borderRadius: 45,
-        }}
-        onPress={() =>
-          dispatch(
-            showAdminProductConfigComponent({
-              categoryId: props.categoryId,
-              ...props,
-              editingProduct: true
-            })
-          )
-        }>
-        <FontAwesome name="edit" size={24} color="#FFF" />
-      </TouchableOpacity> */}
-    </View>
   );
 };
 

@@ -3,26 +3,23 @@ import Constants from '../../../../config/constants/Constants';
 
 export const styles = StyleSheet.create({
   productCardButton:{
+    height:140,
+    width:160,
+    justifyContent:'flex-end',
+    alignItems:'flex-end',
+  },
+  productCardContainer: {
     height:'100%',
     width:'100%',
     justifyContent:'center',
-    alignItems:'center',
-  },
-  productCardContainer: {
-    height:180,
-    width:200,
-    borderRadius:25,
-    justifyContent:'center',
     alignItems:'flex-end',
-    marginHorizontal:10,
   },
   productImageContainer:{
     position:'absolute',
     alignSelf:'flex-start',
-    bottom:50,
-    left:20,
-    height:170,
-    width:100,
+    height:140,
+    width:80,
+    left:-5,
     justifyContent:'center',
     alignItems:'center',
     zIndex:25,
@@ -33,26 +30,29 @@ export const styles = StyleSheet.create({
   },
   productInformationContainer:{
     height:100,
-    width:150,
-    right:15,
-    bottom:25,
+    width:155,
+    padding:6,
     justifyContent:'center',
     alignItems:'flex-end',
     backgroundColor:Constants.Colors.yellow,
-    borderRadius:10,
+    borderRadius:20,
   },
   productDetailsContainer:{
     alignItems:'flex-start',
-    width:'60%',
+    width:85,
   },
   productNameTitle:{
+    height:20,
+    width:90,
     fontFamily:Constants.fontFamilyXBold,
-    fontSize:15,
+    fontSize:14,
     textAlign:'left',
     color:Constants.Colors.textsPrimary
   },
   productNameSubtitle:{
     textAlign:'left',
+    height:15,
+    width:85,
     fontFamily:Constants.fontFamily,
     fontSize:12,
     color:Constants.Colors.textsPrimary

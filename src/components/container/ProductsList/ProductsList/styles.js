@@ -3,31 +3,32 @@ import Constants from 'config/constants/Constants';
 
 export const styles = StyleSheet.create({
   productsListContainer: {
-    height:230,
+    height:210,
     width:'100%',
+    justifyContent:'flex-start',
     alignItems:'center',
-    
   },
   productsListNameContainer:{
     height:70,
     width:'80%',
-    top:15,
+    
     justifyContent:'center',
     alignItems:'flex-start',
   },
   productsListNameTitle:{
     alignSelf:'flex-start',
     textAlign:'center',
-    color:Constants.Colors.textsSecondary,
+    color:Constants.Colors.textsPrimary,
     position:'absolute',
     bottom:25,
-    fontSize:25,
-    fontFamily:Constants.fontFamily
+    fontSize:20,
+    fontFamily:Constants.fontFamilyXBold,
+    borderBottomWidth:0.5
   },
   productsList:{
-    justifyContent:'center',
+    justifyContent:'flex-start',
     alignItems:'center',
-    height:200,
+    paddingHorizontal:15,
   },
 
 });

@@ -28,6 +28,7 @@ import { SharedElement } from 'react-native-motion';
 import * as SecureStore from 'expo-secure-store';
 import fetchProductsList from 'store/ducks/actions/productsList';
 import { showAdminCategoryConfigComponent } from 'store/ducks/actions/showComponent';
+import LoadingCoin from 'components/presentational/LoadingCoin'
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
@@ -45,42 +46,41 @@ class HomeScreen extends Component {
     }
   };
   render() {
-    // if (this.props.loading)
-    //   return (
-    //   <View style={{flex:1,justifyContent:'center', alignItems:'center', backgroundColor:"#FFF"}}>
-    //   <Image
-    //     style={{height:130,width:130, alignItems:'flex-start',bottom:40}}
-    //     source={require('assets/images/lottieActivityBurguer.gif')}
-    //     resizeMode="cover"
-    //   />
-    // </View>)
-    return (
+     if (this.props.loading)
+       return (
+        <View style={{flex:1,justifyContent:"center", alignItems:'center', backgroundColor:Constants.Colors.backgroundColor}}>
+        <LoadingCoin height={100} width={100}/>
+        </View>
+       )
+       return (
       <View style={styles.container}>
+      
         <FlatList
           contentContainerStyle={styles.productsList}
           data={this.props.productsList}
+          keyboardShouldPersistTaps='always'
           ListHeaderComponent={
-              <View style={styles.headerImageContainer}>
+            <View style={styles.headerImageContainer}>
                 <Image
                   style={styles.headerImage}
                   source={require('assets/images/ambevProducts.png')}
                   resizeMode="contain"
-                />
+                  />
               </View>
           
-          }
-          renderItem={({ item }) => (
-            <ProductsList
-              categoryId={item.id}
-              productsListTitle={item.title}
-              productsListSubtitle={item.subtitle}
-              products={item.products}
-            />
+        }
+        renderItem={({ item }) => (
+          <ProductsList
+          categoryId={item.id}
+          productsListTitle={item.title}
+          productsListSubtitle={item.subtitle}
+          products={item.products}
+          />
           )}
           ListFooterComponent={<View style={{height:Constants.Layout.footerHeight}}/>}
           keyExtractor={(item) => `${item.id}`}
           showsVerticalScrollIndicator={false}
-        />
+          />
         
 
         <AdminProductConfigurationForm />
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor: Constants.Colors.backgroundColor,
   },
   header: {},
-  productsList: {width:'100%'},
+  productsList: {},
   
   headerImageContainer: {
     width: '95%',

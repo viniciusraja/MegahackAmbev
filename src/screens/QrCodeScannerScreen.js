@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { showHintComponent } from 'store/ducks/actions/showComponent';
 import HintsComponent from 'components/container/HintsComponent'
 import api from 'services/api';
-
+import ScanIcon from 'assets/svg/ScanIcon.svg'
 export default function QrCodeScannerScreen() {
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
@@ -29,7 +29,6 @@ export default function QrCodeScannerScreen() {
   //   if(!!navigationData.route)navigate(`${navigationData.route}`)
   // }, [navigationData]);
   const sendUserPointsForRecycling= async(qrCodeUUID)=>{
-   console.log('userCheckPointsqrcodescanner')
     try{
       api
       .get(`recycling/${qrCodeUUID}`,{headers:{'user':1}})
@@ -68,7 +67,8 @@ export default function QrCodeScannerScreen() {
         style={StyleSheet.absoluteFillObject}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
         />
-    <Ionicons name="ios-qr-scanner" size={300} color={Constants.Colors.yellow} />
+      <ScanIcon style={{height:250, width:250}}/> 
+  
       {scanned && 
       <TouchableOpacity onPress={() => setScanned(false)}
       style={styles.scanAgainButtom}

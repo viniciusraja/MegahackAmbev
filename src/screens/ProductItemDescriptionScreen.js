@@ -23,26 +23,10 @@ import LoginContainer from 'components/container/LoginContainer';
 import FooterNavBar from 'components/container/FooterNavBar'
 
 
-
-
-function checkNumberOfItemsInCart(id){
-  const cartList= useSelector(state => (state.getCartList.cartList))
-  let count=0
-  if(cartList)
-  cartList.map((item,index)=>{
-    if(item.id==id){
-    count=item.count
-    }
-  })
-  
-  return count
-}
-
 const ProductItemDescriptionScreen = (props) => {
   const data = props.navigation.state.params.props;
   const dispatch= useDispatch()
   const {navigate} = useNavigation();
-  const itemsInCart=checkNumberOfItemsInCart(data.id)
   const [numberOfItemsInCart, setNumberOfItemsInCart] = useState(0);
   return (
     <View style={styles.container}>
@@ -52,65 +36,44 @@ const ProductItemDescriptionScreen = (props) => {
         >
         <AntDesign name="close" size={25} color={Constants.Colors.lightGrey} />
         </TouchableOpacity>
+        {data.family!='-'&&<View style={styles.productFamilyDescriptionContainer}>
+
+            <Text style={styles.productFamilyDescriptionText}>
+              {data.family.toUpperCase()}
+            </Text>
+            </View>}
       <View style={styles.detailsContainer}>
+      {data.abv!="-"&&<View style={{position:'absolute',top:55, right:60,justifyContent:'center',alignItems:'center', flexDirection:'row'}}>
+          <Text style={styles.productFamilyDescriptionText}>
+                          ABV {data.abv}
+                                </Text>
+      <Text style={{fontFamily:Constants.fontFamily,color:'#FFF', fontSize:20, marginRight:5}}>%</Text>
+                </View>}
         <View style={styles.productNameContainer}>
         <SharedElement
-          id={`item.${data.id}.price`}
+          id={`item.${data.id}.title`}
           >
-          <Text style={styles.productNameText}>{`R$${data.price}`}</Text>
+          <Text style={styles.productNameText}>{`${data.name}`}</Text>
         </SharedElement>
           </View>
         <View
           style={{
-            justifyContent: 'space-between',
+            justifyContent: 'flex-start',
             alignItems: 'center',
+            
             height: 200,
           }}>
           <StyledBars
-            innerColor={Constants.Colors.yellow}
+            innerColor={"#000"}
             outsideColor={Constants.Colors.backgroundColor}
           />
-          <View style={styles.burguerDetailContainer}>
-          <SharedElement
-            id={`item.${data.id}.title`}
-            style={styles.productNameContainer}>
-            <Text style={styles.productName}>{data.name}</Text>
-          </SharedElement>
-            <Text style={styles.burguerDetailText}>
-              {data.ingredients_details}
+          <View style={styles.productDetailContainer}>
+        
+            <Text style={styles.productDescription}>
+              {data.description}
             </Text>
-            <Text style={styles.burguerNutritionalDetailText}>
-              {data.allergicI_iformation}
-            </Text>
+            
           </View>
-          <StyledBars
-            innerColor={Constants.Colors.yellow}
-            outsideColor={Constants.Colors.backgroundColor}
-          />
-        </View>
-        <View style={styles.productsFooterContainer}>
-          <View style={styles.quantityOfProductsContainer}>
-            <TouchableOpacity style={styles.addIconContainer}
-            onPress={()=>dispatch(removeItemToCart(data))
-                          }
-            >
-              <Ionicons name="ios-remove" size={28} color="#fff"/>
-            </TouchableOpacity>
-            <Text style={styles.quantityOfProductsText}>{itemsInCart}</Text>
-            <TouchableOpacity style={styles.addIconContainer}
-            onPress={()=>dispatch(addItemToCart(data))
-                          }
-            >
-              <Ionicons name="ios-add" size={28} color="#fff"/>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.addToCartContainer}>
-            <View style={styles.addToCartIconContainer}>
-            <MaterialIcons name="attach-money" size={26} color={Constants.Colors.yellow} />
-            </View>
-        <Text style={styles.addToCartTotalValueText}>
-          {(data.price*itemsInCart).toFixed(2)}</Text>
-</View>
         </View>
       </View>
       <SharedElement
@@ -118,7 +81,7 @@ const ProductItemDescriptionScreen = (props) => {
         style={styles.productImageContainer}>
         <Image
           style={styles.productImage}
-          source={{uri:data.url}}
+          source={{uri:data.image}}
           resizeMode="contain"
         />
       </SharedElement>
@@ -137,19 +100,18 @@ const styles = StyleSheet.create({
     backgroundColor: Constants.Colors.backgroundColor,
   },
   detailsContainer: {
-    height: '70%',
+    height: '80%',
     width: '100%',
     alignItems: 'center',
-    paddingTop: 20,
-    justifyContent: 'space-evenly',
-    backgroundColor: '#f5f5f5',
+    justifyContent: 'center',
+    backgroundColor: Constants.Colors.yellow,
     borderTopRightRadius: 500,
     borderTopStartRadius: 500,
   },
   productImageContainer: {
     position: 'absolute',
     alignSelf: 'center',
-    top: 100,
+    top: 15,
     height: 200,
     width: 200,
     justifyContent: 'center',
@@ -161,60 +123,52 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   productNameContainer: {
+    width: 190,
     height: 60,
-    width: 140,
-    alignSelf: 'flex-end',
-    bottom: 50,
-    right: 10,
-    paddingRight: 5,
+    top: 10,
     justifyContent: 'center',
-    alignItems: 'flex-end',
-    backgroundColor: Constants.Colors.yellow,
-    borderRadius: 20,
+    alignItems: 'center',
   },
   productNameText: {
     width:'100%',
     height:'100%',
-    fontFamily: Constants.fontFamily,
-    fontSize: 42,
+    fontFamily: Constants.fontFamilyXBold,
+    fontSize: 35,
     textAlign:'right',
     textAlignVertical:'center',
-    color: '#020202',
+    color: '#fff',
   },
-  productNameContainer: {
-    width: 150,
-    height: 60,
-    top: 10,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  productName: {
-    bottom: 5,
-    textAlign: 'center',
-    color: Constants.Colors.backgroundColor,
-    fontFamily: Constants.fontFamily,
-    fontSize: 35,
-  },
-  burguerDetailContainer: {
-    width: '90%',
+  productDetailContainer: {
+    width: '85%',
     height:'80%',
-    paddingBottom:10,
+    paddingVertical:10,
     justifyContent:'space-between',
     alignItems:'center',
   },
-  burguerDetailText: {
-    textAlign: 'center',
+  productDescription: {
+    textAlign: 'justify',
     color: Constants.Colors.backgroundColor,
-    fontFamily: Constants.fontFamily,
-    fontSize: 25,
+    fontFamily: Constants.fontFamilyBold,
+    fontSize: Constants.fontSizeMedium,
   },
-  burguerNutritionalDetailText: {
+  productFamilyDescriptionContainer:{
+    height:55,
+    width:100,
+    marginLeft:10,
+    borderWidth:2.5,
+    borderStyle:'dotted',
+    borderColor:Constants.Colors.yellow,
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius:10,
+    backgroundColor:Constants.Colors.yellow,
+    alignSelf:'flex-start'
+  },
+  productFamilyDescriptionText: {
     textAlign: 'center',
-    top: 5,
-    color: Constants.Colors.backgroundColor,
-    fontFamily: Constants.fontFamily,
-    fontSize: 18,
+    color: "#FFF",
+    fontFamily: Constants.fontFamilyXBold,
+    fontSize: 15,
   },
   productsFooterContainer: {
     width: '90%',
@@ -282,7 +236,8 @@ ProductItemDescriptionScreen.sharedElements = (
   showing
 ) => {
   if ((otherNavigation.state.routeName === 'Home') ) {
-  const data = navigation.getParam('props');
+    const data = navigation.getParam('props');
+    console.log(data, 'aquiiii products details')
   return [
     {
       id: `item.${data.id}.photo`,
@@ -290,7 +245,7 @@ ProductItemDescriptionScreen.sharedElements = (
       resize: 'clip',
     },
     {
-      id: `item.${data.id}.price`,
+      id: `item.${data.id}.title`,
       animation: 'fade',
       align: 'left-center',
     },
