@@ -4,10 +4,6 @@ import {
   FETCH_PRODUCTS_LIST_SUCCESS,
   SHOULD_UPDATE_PRODUCTS_LIST
 } from 'store/ducks/actions/types';
-import burguersList from '../../data/burguersList.json';
-import sideDishesList from '../../data/sideDishesList.json';
-import drinksList from '../../data/drinksList.json';
-
 const initialState = {
   pending:false,
   error:null,
