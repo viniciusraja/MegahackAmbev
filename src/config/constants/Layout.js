@@ -9,5 +9,6 @@ export default {
     height,
   },
   headerHeight:55,
+  footerHeight:70,
   isSmallDevice: width < 375,
 };

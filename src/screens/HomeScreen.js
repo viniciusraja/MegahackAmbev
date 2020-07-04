@@ -13,7 +13,6 @@ import {
   Image,
   Linking,
   SafeAreaView,
-  
 } from 'react-native';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
@@ -32,7 +31,7 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeSlide:0
+      activeSlide: 0,
     };
   }
   componentDidMount = async () => {
@@ -42,6 +41,39 @@ class HomeScreen extends Component {
     if (prevProps.shouldUpdateList !== this.props.shouldUpdateList) {
       await this.props.fetchProductsList('/category');
     }
+  };
+  headerPublicity = ({ item, index }) => {
+    return (
+      <View style={{ height: 300 }}>
+        <TouchableOpacity
+          style={styles.headerImageContainer}
+          onPress={() => Linking.openURL(item.link)}>
+          <Image
+            style={styles.headerImage}
+            source={{ uri: item.uri }}
+            resizeMode="cover"
+          />
+          <Text
+            style={{
+              height: 60,
+              alignSelf: 'flex-end',
+              width: 300,
+              fontSize: 24,
+              position: 'absolute',
+              textAlign: 'center',
+              bottom: 0,
+              borderTopLeftRadius: 100,
+              textAlignVertical: 'center',
+              borderBottomRightRadius: 40,
+              backgroundColor: Constants.Colors.yellow,
+              color: '#FFF',
+              fontFamily: Constants.fontFamilyBold,
+            }}>
+            {item.title}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
   };
   render() {
     if (this.props.loading)
@@ -62,61 +94,45 @@ class HomeScreen extends Component {
           contentContainerStyle={styles.productsList}
           data={this.props.productsList}
           keyboardShouldPersistTaps="always"
-          ListHeaderComponent={<View style={{justifyContent:'flex-start', height:270}}>
-            <Pagination
-            
-            dotsLength={this.props.productsList.length-1}
-            activeDotIndex={this.state.activeSlide}
-            containerStyle={{position:'absolute', bottom:-30, alignSelf:"center"}}
-            dotStyle={{
-                width: 10,
-                height: 10,
-                borderRadius: 5,
-                marginHorizontal: 8,
-                backgroundColor: Constants.Colors.yellow
-            }}
-            inactiveDotStyle={{
-              width: 7,
-              height: 7,
-            }}
-            inactiveDotOpacity={0.4}
-            inactiveDotScale={0.6}
-          />
-            <Carousel
-              ref={(c) => { this._carousel = c; }}
-              data={this.props.headerAdvertisement}
-              autoplay={true}
-              enableMomentum={false}
-              loop={true}
-              lockScrollWhileSnapping={true}
-              onSnapToItem={(index) => this.setState({ activeSlide: index }) }
-              renderItem={
-                ({item,index})=>{
-                return <View style={{height:300}}><TouchableOpacity style={styles.headerImageContainer}
-                onPress={() => Linking.openURL(item.link)}>
-              <Image
-                style={styles.headerImage}
-                source={{uri:item.uri}}
-                resizeMode="cover"
+          ListHeaderComponent={
+            <View style={{ justifyContent: 'flex-start', height: 270 }}>
+              <Pagination
+                dotsLength={this.props.productsList.length - 1}
+                activeDotIndex={this.state.activeSlide}
+                containerStyle={{
+                  position: 'absolute',
+                  bottom: -30,
+                  alignSelf: 'center',
+                }}
+                dotStyle={{
+                  width: 10,
+                  height: 10,
+                  borderRadius: 5,
+                  marginHorizontal: 8,
+                  backgroundColor: Constants.Colors.yellow,
+                }}
+                inactiveDotStyle={{
+                  width: 7,
+                  height: 7,
+                }}
+                inactiveDotOpacity={0.4}
+                inactiveDotScale={0.6}
               />
-              <Text style={{height:60,alignSelf:'flex-end', width:300,fontSize:24,position:"absolute",textAlign:'center', bottom:0, borderTopLeftRadius:100,textAlignVertical:'center', borderBottomRightRadius:40, backgroundColor:Constants.Colors.yellow, color:'#FFF', fontFamily:Constants.fontFamilyBold}}>{item.title}</Text>
-            </TouchableOpacity>
-             
-          </View>}
-         
-        }
-              sliderWidth={Constants.Layout.window.width}
-              itemWidth={Constants.Layout.window.width}
-            />
-            
-          
-            
-          </View> 
-          
-          
-          
-          
-          
+              <Carousel
+                ref={(c) => {
+                  this._carousel = c;
+                }}
+                data={this.props.headerAdvertisement}
+                autoplay={true}
+                enableMomentum={false}
+                loop={true}
+                lockScrollWhileSnapping={true}
+                onSnapToItem={(index) => this.setState({ activeSlide: index })}
+                renderItem={this.headerPublicity}
+                sliderWidth={Constants.Layout.window.width}
+                itemWidth={Constants.Layout.window.width}
+              />
+            </View>
           }
           renderItem={({ item }) => (
             <ProductsList
@@ -161,7 +177,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     height: '100%',
     width: '100%',
-    borderRadius:25,
+    borderRadius: 25,
   },
   buttonHamburguerContainer: {
     position: 'absolute',

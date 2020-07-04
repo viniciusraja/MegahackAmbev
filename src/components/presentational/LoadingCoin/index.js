@@ -1,10 +1,7 @@
 import React from 'react';
 
-import LoadingCoin from './LoadingCoin'
+import LoadingCoin from './LoadingCoin';
 
 export default (props) => {
-  return (
-    <LoadingCoin  {...props}
-    />
-  );
+  return <LoadingCoin {...props} />;
 };
