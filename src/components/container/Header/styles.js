@@ -57,11 +57,9 @@ export const styles = StyleSheet.create({
     
     autoCompleteContainerToFixPosition: {
       position:'absolute',
-      zIndex: 10,
-      width:300,
+      zIndex: 100,
       right:10,
       top:(Constants.Layout.headerHeight-40)/2,
-      height:Constants.Layout.headerHeight,
     },
     inputSearchProductContainer: {
       height: 40,
@@ -100,7 +98,7 @@ export const styles = StyleSheet.create({
       height: 55,
       width:'100%',
       backgroundColor: '#F5F5F5',
-      backgroundColor:'red',
+      // backgroundColor:'red',
       borderRadius: 30,
       marginVertical: 2,
     },

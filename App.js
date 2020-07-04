@@ -7,10 +7,11 @@ import { StatusBar, View} from 'react-native';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import Router from 'navigation/navigations'
+import LoadingCoin from 'components/presentational/LoadingCoin'
 
 const store=configureStore()
 class App extends React.Component{
-
+    
         state = {
             fontLoaded: false,
           };
@@ -48,7 +49,7 @@ class App extends React.Component{
         <StatusBar hidden />
         <Router/>
         </Provider>
-        </>:<View/>
+        </>: <LoadingCoin/>
         )
     }
 }

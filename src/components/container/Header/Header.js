@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   View,
   Animated,
-  TouchableOpacity,
   Text,
   TextInput,
   Easing,
@@ -19,8 +18,10 @@ import { styles } from './styles';
 import Constants from '../../../config/constants/Constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { showLoginComponent } from 'store/ducks/actions/showComponent';
-import { useNavigation } from 'react-navigation-hooks';
+import { useNavigation, useNavigationState } from 'react-navigation-hooks';
 import Autocomplete from 'react-native-autocomplete-input';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import UserPoints from 'screens/UserPoints';
 
 const springValue = new Animated.Value(0);
 const animatedEvent = Animated.event(
@@ -79,13 +80,13 @@ const Header = (props) => {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
   const { navigate } = useNavigation();
+  const { routeName } = useNavigationState();
   const products = searchProducts(search,allProducts);
   console.log(products)
   const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
   let total = getTotalPriceOfCart(cartList);
   return (
-    <View style={styles.headerContainer}>
-      
+    <View style={[styles.headerContainer]}>
       <View style={styles.autoCompleteContainerToFixPosition}>
               <Autocomplete
                 onPress={() => this.myTextInput.current.clear()}
@@ -119,7 +120,9 @@ const Header = (props) => {
                           }),
                           Keyboard.dismiss()
                         }}>
-                        
+                        <View
+                        style={[styles.inputSearchCountryItemContainer]}
+                        >
                            <Image
                             style={styles.inputSearchCountryFlagImage}
                             source={{
@@ -130,7 +133,7 @@ const Header = (props) => {
                           <Text style={styles.inputSearchCountryText}>
                             {item.name}
                           </Text>
-                       
+                          </View>
                       </TouchableOpacity>
                     );
                   }
@@ -140,30 +143,22 @@ const Header = (props) => {
             </View>
 
 
-
-      <TouchableOpacity
-        onPress={() => !!userInfo?dispatch(showLoginComponent()):navigate('UserInfoScreen')}
+      {!!userInfo.image?<TouchableOpacity
+        onPress={() => navigate("UserPoints")}
         style={styles.loginButtonContainer}>
-        {!!userInfo.picture?
           <Image
-          style={{height:30,width:30,borderRadius:10}}
-          source={{uri:userInfo.picture.data.url}}/>
-          :<FontAwesome
+          style={{height:35,width:35,borderRadius:30}}
+          source={{uri:userInfo.image}}/>
+      </TouchableOpacity>: 
+      <TouchableOpacity
+        onPress={() =>dispatch(showLoginComponent())}
+        style={styles.loginButtonContainer}>
+        <FontAwesome
           name="user-circle"
           size={24}
           color={Constants.Colors.lightGrey}
         />
-        }
-        {(true)&&<Animated.View
-          style={[
-            styles.userLevelContainer,
-            {
-              transform: [{ scale: springValue }],
-            },
-          ]}>
-          <Text style={styles.userLevelText}>2</Text>
-        </Animated.View>}
-      </TouchableOpacity> 
+      </TouchableOpacity>} 
     </View>
   );
 };

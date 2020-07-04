@@ -23,14 +23,15 @@ export const styles = StyleSheet.create({
   },
   signInContainer:{
     width:'100%',
-    height:'57%',
-    justifyContent:'space-between',
+    height:225,
+    justifyContent:'flex-start',
     alignItems:'center'
   },
   input:{
     height:40,
     width: '80%',
     paddingLeft:10,
+    marginBottom:8,
     textAlign: 'left',
     color: '#0c0c0c',
     backgroundColor:'#fff',
