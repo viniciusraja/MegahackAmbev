@@ -61,7 +61,7 @@ const LoginContainer = (props) => {
           const { sub } = {
             ...parseJwt(await SecureStore.getItemAsync('userToken')),
           };
-          console.log(sub);
+         
           dispatch(fetchUserInfo(`user/${sub}`));
         })
         .catch((err) => console.log(err));

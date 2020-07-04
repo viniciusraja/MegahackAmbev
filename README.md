@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=250px height=130px src="./src/assets/images/Logo.png" alt="Project logo"></a>
+ <img width=150 height=150 src="./src/assets/images/icon.png" alt="Project logo"></a>
 </p>
 
 <h3 align="center"></h3>
@@ -8,22 +8,22 @@
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/viniciusraja/E-Commerce.svg)](https://github.com/viniciusraja/E-Commerce/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/viniciusraja/E-Commerce.svg)](https://github.com/viniciusraja/E-Commerce/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/viniciusraja/MegahackAmbev.svg)](https://github.com/viniciusraja/MegahackAmbev/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/viniciusraja/MegahackAmbev.svg)](https://github.com/viniciusraja/MegahackAmbev/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
 
 ---
 
-<p align="center"> Protótipo de App de um pequeno restaurante focando no melhor UX/UI.
+<p align="center"> Protótipo de App realizado em menos de uma semana no desafio da Hackaton MegaHack 3.0
     <br> 
-    App prototype of a small restaurant focusing on the best UX / UI.
+    App prototype made in a week for a Hackaton.
 </p>
 
 <p align="center">
   <a href="" rel="noopener">
- <img width=250px src="./readme/AppUsability.gif" alt="Gif Do App sendo Usado"></a>
+ <img width=250px src="./readme/appScreen.jpeg" alt="Tela Inicial do App"></a>
 </p>
 
 ## 📝 Table of Contents
@@ -38,63 +38,60 @@
 ## 🧐 About <a name = "about"></a>
 
 <p align="justify">
-Aplicativo E-commerce, visando como clientes pequenos comerciantes, que necessitam de ajuda para superar as dificuldades em atender seus usuários durante a pandemia. 
+Aplicativo Ambev Experience, faz parte de um desafio correspondente a Hackaton Megahack 3.0.
 </p>
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
 
-### Prerequisites
+### Executando o APP
 
-This project was built using expo React Native, in this case you need to configure the environment on your machine.
+Você poderá executar o Ambev Experience por meio do App do Expo, basta escanear o QrCode abaixo com o App Expo, que pode ser encontrado na PlayStore.
 
-### Installing
-
-Clone this repo to your local machine using:
-
-```
-https://github.com/viniciusraja/E-Commerce
-
-```
-
-Install all dependencies
-
-```
-npm install
-or
-yarn install
-```
-
-Run project
-
-```
-npm start
-or
-yarn start
-or
-expo start
-```
+Você também poderá executar o app por meio do navegador com o link abaixo:
+https://expo.io/appetize-simulator?url=https://expo.io/@viniciusraja/megahack-ambev-experience
 
 
-## 🔧 Running the tests <a name = "tests"></a>
+O QrCode também pode ser encontrado no link abaixo:
+https://expo.io/@viniciusraja/megahack-ambev-experience
 
-Tests are still being developed.
+<p align="center">
+  <a href="" rel="noopener">
+ <img width=300px src="./readme/expoQrcode.png" alt="QrCode para executar app"></a>
+</p>
 
-## 🎈 Usage <a name="usage"></a>
 
-Selecione os produtos desejados, confira seu carrinho e encaminhe o seu pedido ao restaurante.
+### Crie sua conta ou entre nesta conta teste
+``` 
+    email: maria@gmail.com
+    password:12345
+```    
+### QrCodes Mockados Para uso no App
+Abra o Scan no seu AmbevExperience após logar na sua conta e escaneie os QrCodes Abaixo
 
-## ⛏️ Built Using <a name = "built_using"></a>
+### QrCode para ganhar pontos com reciclagem
+<p align="center" >
+  <a href="" rel="noopener" margin-right=10>
+ <img width=300px src="./readme/QrcodeReciclagem.png" alt="Qrcode para uso do usuário">
+ </a>
 
-- [React Native](https://reactnative.dev/) - React Native is a JavaScript framework for writing real, natively rendering mobile applications for iOS and Android.
-- [Expo](https://docs.expo.io/) - Expo is a framework and a platform for universal React applications.
-- [Redux](https://redux.js.org/) - Redux is a predictable state container for JavaScript apps.
+</p>
+<p align="center" >
+  <a href="" rel="noopener">
+ <img width=300px src="./readme/QrcodeReciclagem2.png" alt="Qrcode para uso do usuário">
+ </a>
+</p>
 
-## ✍️ Authors <a name = "authors"></a>
 
-- [@viniciusraja](https://github.com/viniciusraja) - Idea & Mobile Development
 
-See also the list of [contributors](https://github.com/viniciusraja/E-commerce/contributors) who participated in this project.
+### QrCode com anúncio
+<p align="center" >
+  <a href="" rel="noopener" margin-right=10>
+ <img width=300px src="./readme/qrCodeAnuncios.png" alt="Qrcode para uso do usuário">
+ </a>
+
+
+
 
 
 
