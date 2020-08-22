@@ -36,7 +36,7 @@
 ## 🧐 About <a name = "about"></a>
 
 <p align="justify">
-Aplicativo Ambev Experience, faz parte de um desafio correspondente a Hackaton Megahack 3.0.
+Aplicativo Ambev Experience possuí uma visão ambiental focado num programa de fidelização dos clientes por meio de recebimento de pontos ao reciclar latinhas, fora implementado leitura de QrCode, para verificar a quantidades de pontos por latas recicladas. Também foi desenvolvido um mapa, que exibia com ícones costumizados as localizações dos pontos de reciclagem ao redor do Brasil, os pontos eram recebidos através de uma chamada a API utilizando Redux para gerenciamento de estados e o redux-thunk como criador de ações, para lidar com ações assíncronas.
 </p>
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
