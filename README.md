@@ -21,10 +21,11 @@
     App prototype made in a week for a Hackaton.
 </p>
 
-<p align="center">
+<div align="center" style="margin-bottom:50px" >
   <a href="" rel="noopener">
- <img width=250px src="./readme/appScreen.jpeg" alt="Tela Inicial do App"></a>
-</p>
+ <img width=250px style="margin-right:150px" src="./readme/AppUsability-1.gif" alt="Tela Inicial do App 1"></a>
+ <img width=250px src="./readme/AppUsability-2.gif" alt="Tela Inicial do App 2"></a>
+</div>
 
 ## 📝 Table of Contents
 
