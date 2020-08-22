@@ -31,15 +31,13 @@
 
 - [About](#about)
 - [Getting Started](#getting_started)
-- [Usage](#usage)
 - [Built Using](#built_using)
-- [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
+
 
 ## 🧐 About <a name = "about"></a>
 
 <p align="justify">
-Aplicativo Ambev Experience, faz parte de um desafio correspondente a Hackaton Megahack 3.0.
+Aplicativo Ambev Experience possuí uma visão ambiental focado num programa de fidelização dos clientes por meio de recebimento de pontos ao reciclar latinhas, fora implementado leitura de QrCode, para verificar a quantidades de pontos por latas recicladas. Também foi desenvolvido um mapa, que exibia com ícones costumizados as localizações dos pontos de reciclagem ao redor do Brasil, os pontos eram recebidos através de uma chamada a API utilizando Redux para gerenciamento de estados e o redux-thunk como criador de ações, para lidar com ações assíncronas.
 </p>
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
@@ -58,7 +56,7 @@ https://expo.io/@viniciusraja/megahack-ambev-experience
 
 <p align="center">
   <a href="" rel="noopener">
- <img width=300px src="./readme/expoQrcode.png" alt="QrCode para executar app"></a>
+ <img width=300px src="https://raw.githubusercontent.com/viniciusraja/MegahackAmbev/master/readme/expoQrcode.PNG" alt="QrCode para executar app"></a>
 </p>
 
 
@@ -73,13 +71,13 @@ Abra o Scan no seu AmbevExperience após logar na sua conta e escaneie os QrCode
 ### QrCode para ganhar pontos com reciclagem
 <p align="center" >
   <a href="" rel="noopener" margin-right=10>
- <img width=300px src="./readme/QrcodeReciclagem.png" alt="Qrcode para uso do usuário">
+ <img width=300px src="https://raw.githubusercontent.com/viniciusraja/MegahackAmbev/master/readme/QrcodeReciclagem.PNG" alt="Qrcode para uso do usuário">
  </a>
 
 </p>
 <p align="center" >
   <a href="" rel="noopener">
- <img width=300px src="./readme/QrcodeReciclagem2.png" alt="Qrcode para uso do usuário">
+ <img width=300px src="https://raw.githubusercontent.com/viniciusraja/MegahackAmbev/master/readme/QrcodeReciclagem2.PNG" alt="Qrcode para uso do usuário">
  </a>
 </p>
 
@@ -88,10 +86,15 @@ Abra o Scan no seu AmbevExperience após logar na sua conta e escaneie os QrCode
 ### QrCode com anúncio
 <p align="center" >
   <a href="" rel="noopener" margin-right=10>
- <img width=300px src="./readme/qrCodeAnuncios.png" alt="Qrcode para uso do usuário">
+ <img width=300px src="https://raw.githubusercontent.com/viniciusraja/MegahackAmbev/master/readme/qrCodeAnuncios.PNG" alt="Qrcode para uso do usuário">
  </a>
 
 
+## ⛏️ Built Using <a name = "built_using"></a>
+
+- [React Native](https://reactnative.dev/) - React Native is a JavaScript framework for writing real, natively rendering mobile applications for iOS and Android.
+- [Expo](https://docs.expo.io/) - Expo is a framework and a platform for universal React applications.
+- [Redux](https://redux.js.org/) - Redux is a predictable state container for JavaScript apps.
 
 
 
